@@ -236,7 +236,7 @@ export default async function StatePage({ params }: PageProps) {
                 return (
                   <tr key={a.slug} className="border-t border-slate-100">
                     <td className="px-4 py-2">
-                      <a href={`/appliance/${a.slug}/`} className="text-amber-600 hover:underline">{a.name}</a>
+                      <a href={`/cost/${a.slug}-in-${slug}/`} className="text-amber-600 hover:underline">{a.name}</a>
                     </td>
                     <td className="px-4 py-2 text-right">{a.avg_watts.toLocaleString()}</td>
                     <td className="px-4 py-2 text-right">{a.typical_hours_per_day}</td>

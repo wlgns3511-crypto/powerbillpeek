@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
-import { getAllStates, getAllAppliances } from "@/lib/db";
+import { getAllStates, getAllAppliances, getTopComparisonPairs } from "@/lib/db";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://powerbillpeek.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const states = getAllStates();
   const appliances = getAllAppliances();
+  const comparisons = getTopComparisonPairs();
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: SITE_URL, changeFrequency: "monthly", priority: 1.0 },
@@ -29,5 +30,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...statePages, ...appliancePages];
+  // State x Appliance combination pages (50 states x N appliances)
+  const costPages: MetadataRoute.Sitemap = [];
+  for (const state of states) {
+    for (const appliance of appliances) {
+      costPages.push({
+        url: `${SITE_URL}/cost/${appliance.slug}-in-${state.slug}`,
+        changeFrequency: "monthly" as const,
+        priority: 0.6,
+      });
+    }
+  }
+
+  // State vs State comparison pages
+  const comparePages: MetadataRoute.Sitemap = comparisons.map((c) => ({
+    url: `${SITE_URL}/compare/${c.slug}`,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...statePages, ...appliancePages, ...costPages, ...comparePages];
 }
