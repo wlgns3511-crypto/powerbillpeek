@@ -98,6 +98,28 @@ export function getAllUtilities(): Utility[] {
   return getDb().prepare('SELECT * FROM utilities ORDER BY customers DESC').all() as Utility[];
 }
 
+export function getUtilityBySlug(slug: string): Utility | undefined {
+  return getDb().prepare('SELECT * FROM utilities WHERE slug = ?').get(slug) as Utility | undefined;
+}
+
+// --- Utility comparison pairs (top 50 utilities by customer count) ---
+
+export function getUtilityComparisonPairs(): { slug: string; util1Slug: string; util2Slug: string }[] {
+  const utilities = getDb().prepare('SELECT slug FROM utilities ORDER BY customers DESC LIMIT 25').all() as { slug: string }[];
+  const slugs = utilities.map((u) => u.slug);
+  const pairs: { slug: string; util1Slug: string; util2Slug: string }[] = [];
+  for (let i = 0; i < slugs.length; i++) {
+    for (let j = i + 1; j < slugs.length; j++) {
+      pairs.push({
+        util1Slug: slugs[i],
+        util2Slug: slugs[j],
+        slug: `${slugs[i]}-vs-${slugs[j]}`,
+      });
+    }
+  }
+  return pairs;
+}
+
 // --- Computed helpers ---
 
 export function getNationalAvgRate(): number {
@@ -172,59 +194,16 @@ export function getNeighboringStates(abbr: string): State[] {
   return getDb().prepare(`SELECT * FROM states WHERE abbr IN (${placeholders}) ORDER BY state`).all(...neighborAbbrs) as State[];
 }
 
-// --- Top state vs state comparison pairs ---
+// --- All state vs state comparison pairs (50*49/2 = 1,225 pairs) ---
 
 export function getTopComparisonPairs(): { state1: string; state2: string; slug: string }[] {
-  const pairs = [
-    ['texas', 'california'], ['new-york', 'california'], ['texas', 'florida'],
-    ['new-york', 'florida'], ['california', 'florida'], ['texas', 'new-york'],
-    ['illinois', 'indiana'], ['ohio', 'michigan'], ['georgia', 'florida'],
-    ['pennsylvania', 'new-york'], ['virginia', 'maryland'], ['north-carolina', 'south-carolina'],
-    ['washington', 'oregon'], ['colorado', 'utah'], ['arizona', 'nevada'],
-    ['massachusetts', 'connecticut'], ['tennessee', 'kentucky'], ['alabama', 'mississippi'],
-    ['minnesota', 'wisconsin'], ['missouri', 'kansas'], ['louisiana', 'texas'],
-    ['new-jersey', 'new-york'], ['georgia', 'alabama'], ['ohio', 'pennsylvania'],
-    ['illinois', 'wisconsin'], ['california', 'arizona'], ['texas', 'louisiana'],
-    ['florida', 'georgia'], ['virginia', 'north-carolina'], ['michigan', 'indiana'],
-    ['colorado', 'arizona'], ['washington', 'california'], ['oregon', 'california'],
-    ['new-york', 'new-jersey'], ['massachusetts', 'new-york'], ['tennessee', 'alabama'],
-    ['iowa', 'nebraska'], ['oklahoma', 'texas'], ['kentucky', 'west-virginia'],
-    ['south-carolina', 'georgia'], ['maryland', 'delaware'], ['hawaii', 'california'],
-    ['alaska', 'hawaii'], ['nevada', 'utah'], ['idaho', 'montana'],
-    ['wyoming', 'colorado'], ['new-mexico', 'arizona'], ['arkansas', 'oklahoma'],
-    ['mississippi', 'louisiana'], ['north-dakota', 'south-dakota'], ['maine', 'new-hampshire'],
-    ['vermont', 'new-hampshire'], ['rhode-island', 'connecticut'], ['california', 'texas'],
-    ['florida', 'california'], ['new-york', 'texas'], ['florida', 'texas'],
-    ['illinois', 'ohio'], ['pennsylvania', 'new-jersey'], ['virginia', 'west-virginia'],
-    ['michigan', 'ohio'], ['georgia', 'tennessee'], ['washington', 'idaho'],
-    ['colorado', 'new-mexico'], ['minnesota', 'iowa'], ['missouri', 'illinois'],
-    ['oregon', 'washington'], ['arizona', 'california'], ['nevada', 'california'],
-    ['massachusetts', 'rhode-island'], ['connecticut', 'new-york'], ['alabama', 'georgia'],
-    ['kentucky', 'tennessee'], ['indiana', 'ohio'], ['wisconsin', 'minnesota'],
-    ['kansas', 'nebraska'], ['oklahoma', 'arkansas'], ['louisiana', 'mississippi'],
-    ['south-dakota', 'nebraska'], ['montana', 'wyoming'], ['utah', 'colorado'],
-    ['hawaii', 'alaska'], ['new-hampshire', 'massachusetts'], ['delaware', 'new-jersey'],
-    ['west-virginia', 'virginia'], ['north-carolina', 'virginia'], ['south-carolina', 'north-carolina'],
-    ['texas', 'arizona'], ['california', 'oregon'], ['new-york', 'connecticut'],
-    ['florida', 'south-carolina'], ['illinois', 'missouri'], ['pennsylvania', 'ohio'],
-    ['georgia', 'north-carolina'], ['michigan', 'wisconsin'], ['tennessee', 'virginia'],
-    ['colorado', 'texas'], ['washington', 'nevada'], ['minnesota', 'north-dakota'],
-    ['maryland', 'pennsylvania'], ['new-jersey', 'connecticut'], ['iowa', 'illinois'],
-    ['indiana', 'illinois'], ['kentucky', 'indiana'], ['alabama', 'tennessee'],
-    ['mississippi', 'alabama'], ['arkansas', 'tennessee'], ['nebraska', 'iowa'],
-    ['kansas', 'oklahoma'], ['oregon', 'nevada'], ['utah', 'nevada'],
-    ['idaho', 'washington'], ['wyoming', 'montana'], ['new-mexico', 'texas'],
-  ];
-
-  // Deduplicate (normalize pair order)
-  const seen = new Set<string>();
-  const unique: { state1: string; state2: string; slug: string }[] = [];
-  for (const [s1, s2] of pairs) {
-    const key = [s1, s2].sort().join('|');
-    if (!seen.has(key)) {
-      seen.add(key);
-      unique.push({ state1: s1, state2: s2, slug: `${s1}-vs-${s2}-electricity` });
+  const states = getDb().prepare('SELECT slug FROM states ORDER BY state').all() as { slug: string }[];
+  const slugs = states.map((s) => s.slug);
+  const pairs: { state1: string; state2: string; slug: string }[] = [];
+  for (let i = 0; i < slugs.length; i++) {
+    for (let j = i + 1; j < slugs.length; j++) {
+      pairs.push({ state1: slugs[i], state2: slugs[j], slug: `${slugs[i]}-vs-${slugs[j]}-electricity` });
     }
   }
-  return unique;
+  return pairs;
 }
