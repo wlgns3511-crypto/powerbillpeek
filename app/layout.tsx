@@ -83,6 +83,8 @@ export default function RootLayout({
                 <a href="https://propertytaxpeek.com" className="hover:text-amber-600">Property Tax</a>
                 <a href="https://shipcalcwize.com" className="hover:text-amber-600">Shipping Calculator</a>
                 <a href="https://powerbillpeek.com" className="hover:text-amber-600 font-semibold">Power Bills</a>
+              
+                <a href="https://sunpowerpeek.com" className="hover:text-amber-600">Solar Power</a>
               </div>
             </div>
             <p className="mt-1">
