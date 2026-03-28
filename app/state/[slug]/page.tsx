@@ -6,7 +6,9 @@ import { faqSchema, breadcrumbSchema } from "@/lib/schema";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { AdSlot } from "@/components/AdSlot";
 import { DataFeedback } from "@/components/DataFeedback";
+import { RateChart } from "@/components/RateChart";
 import { FreshnessTag } from "@/components/FreshnessTag";
+import { CiteButton } from "@/components/CiteButton";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -98,6 +100,8 @@ export default async function StatePage({ params }: PageProps) {
           ? ` That's ${rateDiffPct}% higher than the national average.`
           : ` That's ${Math.abs(Number(rateDiffPct))}% lower than the national average.`}
       </p>
+
+      <RateChart stateRate={state.avg_rate_kwh} nationalRate={nationalRate} stateName={state.state} />
 
       {/* Rate overview cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -298,6 +302,10 @@ export default async function StatePage({ params }: PageProps) {
 
       <DataFeedback />
       <FreshnessTag source="U.S. Energy Information Administration (EIA)" />
+
+      <div className="flex items-center gap-4 mt-4">
+        <CiteButton title={`${state.state} Electricity Rates`} url={`https://powerbillpeek.com/state/${slug}/`} source="PowerBillPeek (EIA Data)" />
+      </div>
     </>
   );
 }
