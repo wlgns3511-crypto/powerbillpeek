@@ -274,13 +274,12 @@ export default async function StatePage({ params }: PageProps) {
         </p>
       </section>
 
-      {/* Cross-references */}
-      <section className="mb-8 p-4 bg-slate-50 rounded-lg border border-slate-200">
-        <h2 className="text-lg font-semibold text-slate-800 mb-2">More Data for {state.state}</h2>
+      {/* Related Data Resources */}
+      <section className="mb-8 p-4 bg-slate-50 rounded-lg">
+        <h3 className="text-sm font-semibold text-slate-500 mb-2">Related Data Resources</h3>
         <div className="flex flex-wrap gap-3 text-sm">
-          <a href={`https://costbycity.com`} className="text-amber-600 hover:underline">Cost of Living</a>
-          <a href={`https://salarybycity.com`} className="text-amber-600 hover:underline">Salary Data</a>
-          <a href={`https://propertytaxpeek.com`} className="text-amber-600 hover:underline">Property Tax</a>
+          <a href="https://sunpowerpeek.com" className="text-amber-600 hover:underline">SunPowerPeek - Solar savings by state &rarr;</a>
+          <a href="https://propertytaxpeek.com" className="text-amber-600 hover:underline">PropertyTaxPeek - Property tax rates &rarr;</a>
         </div>
       </section>
 
