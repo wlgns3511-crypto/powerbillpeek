@@ -38,6 +38,25 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5724806562146685"
           crossOrigin="anonymous"
         />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "name": "PowerBillPeek",
+              "url": "https://powerbillpeek.com",
+              "description": "Compare electricity rates across all 50 US states. Calculate your power bill, explore utility costs, and find the cheapest electricity rates with our free tools.",
+              "inLanguage": "en-US"
+            },
+            {
+              "@type": "Organization",
+              "name": "PowerBillPeek",
+              "url": "https://powerbillpeek.com",
+              "description": "Compare electricity rates across all 50 US states. Calculate your power bill, explore utility costs, and find the cheapest electricity rates with our free tools.",
+              "sameAs": []
+            }
+          ]
+        }) }} />
       </head>
       <body className={`${inter.className} antialiased bg-white text-slate-900 min-h-screen flex flex-col`}>
         <header className="border-b border-amber-200 bg-gradient-to-r from-amber-50 to-yellow-50">
