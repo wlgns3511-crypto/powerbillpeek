@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getAllStates, getAllAppliances, getTopComparisonPairs, getAllUtilities, getUtilityComparisonPairs } from "@/lib/db";
+import { getAllStates, getAllAppliances, getTopComparisonPairs, getAllUtilities, getUtilityComparisonPairs, getAllZipPower } from "@/lib/db";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://powerbillpeek.com";
 
@@ -67,5 +67,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...statePages, ...appliancePages, ...costPages, ...comparePages, ...utilityPages, ...utilityComparePages];
+  // ZIP code pages
+  const zips = getAllZipPower();
+  const zipPages: MetadataRoute.Sitemap = zips.map((z) => ({
+    url: `${SITE_URL}/zip/${z.slug}`,
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...staticPages, ...statePages, ...appliancePages, ...costPages, ...comparePages, ...utilityPages, ...utilityComparePages, ...zipPages];
 }

@@ -120,6 +120,55 @@ export function getUtilityComparisonPairs(): { slug: string; util1Slug: string; 
   return pairs;
 }
 
+// --- ZIP power queries ---
+
+export interface ZipPower {
+  zip_code: string;
+  city: string;
+  state: string;
+  slug: string;
+  avg_rate: number;
+  est_monthly_bill: number;
+  est_annual_cost: number;
+  median_income: number;
+  energy_burden_pct: number;
+}
+
+export function getAllZipPower(): ZipPower[] {
+  return getDb().prepare('SELECT * FROM zip_power ORDER BY zip_code').all() as ZipPower[];
+}
+
+export function getZipPowerBySlug(slug: string): ZipPower | undefined {
+  return getDb().prepare('SELECT * FROM zip_power WHERE slug = ?').get(slug) as ZipPower | undefined;
+}
+
+export function getZipPowerByState(stateAbbr: string): ZipPower[] {
+  return getDb().prepare('SELECT * FROM zip_power WHERE state = ? ORDER BY est_annual_cost DESC').all(stateAbbr) as ZipPower[];
+}
+
+export function getHighestBurdenZips(limit = 20): ZipPower[] {
+  return getDb().prepare('SELECT * FROM zip_power WHERE energy_burden_pct IS NOT NULL AND energy_burden_pct > 0 ORDER BY energy_burden_pct DESC LIMIT ?').all(limit) as ZipPower[];
+}
+
+// --- Rate history queries ---
+
+export interface RateHistory {
+  state: string;
+  year: number;
+  price: number;
+  customers: number;
+  sales_mwh: number;
+  revenue_million: number;
+}
+
+export function getRateHistoryByState(stateAbbr: string): RateHistory[] {
+  return getDb().prepare('SELECT * FROM rate_history WHERE state = ? ORDER BY year DESC').all(stateAbbr) as RateHistory[];
+}
+
+export function getRateHistoryAllStates(year: number): RateHistory[] {
+  return getDb().prepare('SELECT * FROM rate_history WHERE year = ? ORDER BY price DESC').all(year) as RateHistory[];
+}
+
 // --- Computed helpers ---
 
 export function getNationalAvgRate(): number {
