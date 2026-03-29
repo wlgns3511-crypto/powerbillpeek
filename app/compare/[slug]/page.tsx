@@ -20,6 +20,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { AdSlot } from "@/components/AdSlot";
 import { DataFeedback } from "@/components/DataFeedback";
 import { FreshnessTag } from "@/components/FreshnessTag";
+import { ComparisonBar } from "@/components/ComparisonBar";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -270,6 +271,42 @@ export default async function CompareStatePage({ params }: PageProps) {
               </tr>
             </tbody>
           </table>
+        </div>
+      </section>
+
+      {/* Visual Comparison Bars */}
+      <section className="mb-8">
+        <h2 className="text-xl font-bold text-slate-800 mb-3">Visual Rate Comparison</h2>
+        <div style={{ display: "flex", flexDirection: "column", gap: "16px", margin: "24px 0" }}>
+          {state1.residential_rate != null && state2.residential_rate != null && (
+            <div>
+              <h3 className="text-sm font-medium text-slate-600 mb-2">Residential Rate (per kWh)</h3>
+              <ComparisonBar
+                bars={[{ label: state1.state, value: state1.residential_rate }, { label: state2.state, value: state2.residential_rate }]}
+                format={(v) => v.toFixed(2) + "¢"}
+                referenceValue={nationalRate}
+              />
+            </div>
+          )}
+          {state1.avg_monthly_bill != null && state2.avg_monthly_bill != null && (
+            <div>
+              <h3 className="text-sm font-medium text-slate-600 mb-2">Average Monthly Bill</h3>
+              <ComparisonBar
+                bars={[{ label: state1.state, value: state1.avg_monthly_bill }, { label: state2.state, value: state2.avg_monthly_bill }]}
+                format={(v) => "$" + v.toLocaleString()}
+                referenceValue={nationalBill}
+              />
+            </div>
+          )}
+          {state1.renewable_pct != null && state2.renewable_pct != null && (
+            <div>
+              <h3 className="text-sm font-medium text-slate-600 mb-2">Renewable Energy Share</h3>
+              <ComparisonBar
+                bars={[{ label: state1.state, value: state1.renewable_pct }, { label: state2.state, value: state2.renewable_pct }]}
+                format={(v) => v.toFixed(1) + "%"}
+              />
+            </div>
+          )}
         </div>
       </section>
 
