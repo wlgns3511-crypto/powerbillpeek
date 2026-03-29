@@ -1,0 +1,23 @@
+{
+  "common": {
+    "home": "Inicio",
+    "calculator": "Calculadora",
+    "compare": "Comparar",
+    "about": "Acerca de",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "contact": "Contacto",
+    "langSwitch": "EN",
+    "langSwitchPrefix": ""
+  },
+  "state": {
+    "electricityRates": "Tarifas de Electricidad en {state}",
+    "residentialRate": "Tarifa Residencial",
+    "commercialRate": "Tarifa Comercial",
+    "industrialRate": "Tarifa Industrial",
+    "monthlyBill": "Factura Mensual",
+    "renewableEnergy": "Energía Renovable",
+    "kilowatt": "Kilovatio",
+    "utilityCompanies": "Compañías de Electricidad"
+  }
+}

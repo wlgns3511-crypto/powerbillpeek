@@ -67,6 +67,7 @@ export default function RootLayout({
             <nav className="flex gap-6 text-sm">
               <a href="/calculator" className="hover:text-amber-600">Calculator</a>
               <a href="/compare" className="hover:text-amber-600">Compare</a>
+              <a href="/es/" className="text-slate-400 hover:text-amber-600 text-xs">ES</a>
             </nav>
           </div>
         </header>

@@ -1,0 +1,23 @@
+{
+  "common": {
+    "home": "Home",
+    "calculator": "Calculator",
+    "compare": "Compare",
+    "about": "About",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "contact": "Contact",
+    "langSwitch": "ES",
+    "langSwitchPrefix": "/es"
+  },
+  "state": {
+    "electricityRates": "Electricity Rates in {state}",
+    "residentialRate": "Residential Rate",
+    "commercialRate": "Commercial Rate",
+    "industrialRate": "Industrial Rate",
+    "monthlyBill": "Monthly Bill",
+    "renewableEnergy": "Renewable Energy",
+    "kilowatt": "Kilowatt",
+    "utilityCompanies": "Utility Companies"
+  }
+}
