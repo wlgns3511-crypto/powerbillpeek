@@ -181,6 +181,16 @@ export function getNationalAvgBill(): number {
   return Math.round(row.avg);
 }
 
+// --- Search ---
+
+export function searchPowerBill(query: string): { states: State[]; appliances: Appliance[]; utilities: Utility[] } {
+  const pattern = `%${query}%`;
+  const states = getDb().prepare('SELECT * FROM states WHERE state LIKE ? OR abbr LIKE ? ORDER BY state LIMIT 10').all(pattern, pattern) as State[];
+  const appliances = getDb().prepare('SELECT * FROM appliances WHERE name LIKE ? OR category LIKE ? ORDER BY name LIMIT 10').all(pattern, pattern) as Appliance[];
+  const utilities = getDb().prepare('SELECT * FROM utilities WHERE name LIKE ? OR state LIKE ? ORDER BY customers DESC LIMIT 10').all(pattern, pattern) as Utility[];
+  return { states, appliances, utilities };
+}
+
 // --- Neighboring states map ---
 
 const NEIGHBORS: Record<string, string[]> = {

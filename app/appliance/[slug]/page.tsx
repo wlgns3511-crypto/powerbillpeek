@@ -7,6 +7,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { AdSlot } from "@/components/AdSlot";
 import { DataFeedback } from "@/components/DataFeedback";
 import { FreshnessTag } from "@/components/FreshnessTag";
+import { AuthorBox } from "@/components/AuthorBox";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -202,6 +203,8 @@ export default async function AppliancePage({ params }: PageProps) {
 
       <DataFeedback />
       <FreshnessTag source="U.S. Energy Information Administration (EIA)" />
+
+      <AuthorBox />
     </>
   );
 }
