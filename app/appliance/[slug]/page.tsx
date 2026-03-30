@@ -8,6 +8,10 @@ import { AdSlot } from "@/components/AdSlot";
 import { DataFeedback } from "@/components/DataFeedback";
 import { FreshnessTag } from "@/components/FreshnessTag";
 import { AuthorBox } from "@/components/AuthorBox";
+import { EditorNote } from "@/components/EditorNote";
+import { DidYouKnow } from "@/components/DidYouKnow";
+import { DataSourceBadge } from "@/components/DataSourceBadge";
+import { CrossSiteLinks } from "@/components/CrossSiteLinks";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -77,7 +81,11 @@ export default async function AppliancePage({ params }: PageProps) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqs)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          ...faqSchema(faqs),
+          dateModified: "2026-03-31",
+          author: { "@type": "Organization", name: "DataPeek" },
+        }) }}
       />
       <script
         type="application/ld+json"
@@ -98,6 +106,8 @@ export default async function AppliancePage({ params }: PageProps) {
         Cost to Run a {appliance.name}
       </h1>
       <p className="text-lg text-slate-600 mb-4">{appliance.description}</p>
+
+      <EditorNote note={`Electricity costs vary dramatically by state. A ${appliance.name} that costs ${formatCurrency(nationalMonthly)}/month at the national average could cost as little as ${formatCurrency(cheapestState.monthly)} in ${cheapestState.state} or as much as ${formatCurrency(expensiveState.monthly)} in ${expensiveState.state}. Always check your local utility rate for the most accurate estimate.`} />
 
       {/* Quick stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -170,6 +180,8 @@ export default async function AppliancePage({ params }: PageProps) {
         </ul>
       </section>
 
+      <DidYouKnow fact={`Running a ${appliance.name} at ${appliance.avg_watts}W for ${appliance.typical_hours_per_day} hours daily uses about ${(dailyKwh * 365).toFixed(0)} kWh per year. That's roughly equivalent to driving an electric vehicle ${((dailyKwh * 365) / 3.5).toFixed(0)} miles.`} />
+
       {/* Related appliances */}
       {relatedAppliances.length > 0 && (
         <section className="mb-8">
@@ -205,6 +217,13 @@ export default async function AppliancePage({ params }: PageProps) {
       <FreshnessTag source="U.S. Energy Information Administration (EIA)" />
 
       <AuthorBox />
+
+      <DataSourceBadge sources={[
+        { name: "EIA", url: "https://www.eia.gov" },
+        { name: "ENERGY STAR", url: "https://www.energystar.gov" },
+      ]} />
+
+      <CrossSiteLinks current="PowerBillPeek" />
     </>
   );
 }
