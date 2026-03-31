@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 const SITE_NAME = "PowerBillPeek";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://powerbillpeek.com";
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   description:
     "Compare electricity rates across all 50 US states. Calculate your power bill, explore utility costs, and find the cheapest electricity rates with our free tools.",
   metadataBase: new URL(SITE_URL),
-  robots: { index: true, follow: true },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
@@ -31,6 +31,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-JYZR7M7715" />
         <script dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-JYZR7M7715")` }} />
         <script
@@ -84,6 +86,8 @@ export default function RootLayout({
               <a href="/privacy" className="hover:text-amber-600">Privacy</a>
               {" | "}
               <a href="/terms" className="hover:text-amber-600">Terms</a>
+              {" | "}
+              <a href="/disclaimer" className="hover:text-amber-600">Disclaimer</a>
               {" | "}
               <a href="/contact" className="hover:text-amber-600">Contact</a>
             </p>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getAllStates, getNationalAvgRate } from "@/lib/db";
 import { formatCents, formatCurrency, getSourceLabel, formatPercent } from "@/lib/format";
+import { itemListSchema } from "@/lib/schema";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { AdSlot } from "@/components/AdSlot";
 import { FreshnessTag } from "@/components/FreshnessTag";
@@ -19,8 +20,11 @@ export default function ComparePage() {
   // Pre-render a full ranking table
   const sorted = [...states].sort((a, b) => a.avg_rate_kwh - b.avg_rate_kwh);
 
+  const listItems = sorted.map(s => ({ name: s.state_name, url: `/state/${s.slug}/` }));
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema('US States Ranked by Electricity Rate', '/compare', listItems)) }} />
       <Breadcrumb items={[
         { label: "Home", href: "/" },
         { label: "Compare States" },

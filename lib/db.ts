@@ -266,3 +266,11 @@ export function getTopComparisonPairs(): { state1: string; state2: string; slug:
   }
   return pairs;
 }
+
+// --- Related appliances (same category) ---
+
+export function getRelatedAppliances(category: string, excludeSlug: string, limit = 6): Appliance[] {
+  return getDb().prepare(
+    'SELECT * FROM appliances WHERE category = ? AND slug != ? ORDER BY avg_watts DESC LIMIT ?'
+  ).all(category, excludeSlug, limit) as Appliance[];
+}
