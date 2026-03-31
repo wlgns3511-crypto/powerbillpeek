@@ -20,7 +20,7 @@ export default function ComparePage() {
   // Pre-render a full ranking table
   const sorted = [...states].sort((a, b) => a.avg_rate_kwh - b.avg_rate_kwh);
 
-  const listItems = sorted.map(s => ({ name: s.state_name, url: `/state/${s.slug}/` }));
+  const listItems = sorted.map(s => ({ name: s.state, url: `/state/${s.slug}/` }));
 
   return (
     <>
