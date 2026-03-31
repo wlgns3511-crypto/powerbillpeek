@@ -72,8 +72,8 @@ export default function RootLayout({
               {SITE_NAME}
             </a>
             <nav className="flex gap-6 text-sm">
-              <a href="/calculator" className="hover:text-amber-600">Calculator</a>
-              <a href="/compare" className="hover:text-amber-600">Compare</a>
+              <a href="/calculator/" className="hover:text-amber-600">Calculator</a>
+              <a href="/compare/" className="hover:text-amber-600">Compare</a>
               <a href="/blog/" className="hover:text-amber-600">Guides</a>
               <a href="/es/" className="text-slate-400 hover:text-amber-600 text-xs">ES</a>
             </nav>
@@ -86,15 +86,15 @@ export default function RootLayout({
               Data from the U.S. Energy Information Administration (EIA), Electric Power Monthly.
             </p>
             <p className="mt-2">
-              <a href="/about" className="hover:text-amber-600">About</a>
+              <a href="/about/" className="hover:text-amber-600">About</a>
               {" | "}
-              <a href="/privacy" className="hover:text-amber-600">Privacy</a>
+              <a href="/privacy/" className="hover:text-amber-600">Privacy</a>
               {" | "}
-              <a href="/terms" className="hover:text-amber-600">Terms</a>
+              <a href="/terms/" className="hover:text-amber-600">Terms</a>
               {" | "}
-              <a href="/disclaimer" className="hover:text-amber-600">Disclaimer</a>
+              <a href="/disclaimer/" className="hover:text-amber-600">Disclaimer</a>
               {" | "}
-              <a href="/contact" className="hover:text-amber-600">Contact</a>
+              <a href="/contact/" className="hover:text-amber-600">Contact</a>
             </p>
             <div className="mt-4 pt-4 border-t border-slate-100">
               <p className="text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">Related Resources</p>
