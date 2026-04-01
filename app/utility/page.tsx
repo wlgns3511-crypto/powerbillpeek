@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description:
     "Browse all major US electric utilities, their average electricity rates, customer counts, and service areas. Find your utility company and compare rates.",
   alternates: { canonical: "https://powerbillpeek.com/utility/" },
+  openGraph: { url: "/utility/" },
 };
 
 export default function UtilityListPage() {

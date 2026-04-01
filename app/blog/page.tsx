@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   description:
     "Expert guides on lowering your electric bill, understanding electricity rates, and energy-saving strategies for your home.",
   alternates: { canonical: "/blog/" },
+  openGraph: { url: "/blog/" },
 };
 
 function formatDate(dateStr: string) {

@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: "About PowerBillPeek",
   description: "Learn about PowerBillPeek, our mission, and data sources for US electricity rates.",
   alternates: { canonical: "/about/" },
+  openGraph: { url: "/about/" },
 };
 
 export default function AboutPage() {

@@ -5,6 +5,7 @@ import { PowerBillCalculator } from "@/components/PowerBillCalculator";
 export const metadata: Metadata = {
   title: "Power Bill Calculator - Embeddable Widget",
   robots: "noindex, nofollow",
+  openGraph: { url: "/embed/power-calc/" },
 };
 
 export default function EmbedPowerCalcPage() {

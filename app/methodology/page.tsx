@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: "Our Methodology",
   description: "Learn how PowerBillPeek collects, processes, and verifies electricity rates and utility cost data.",
   alternates: { canonical: "/methodology/" },
+  openGraph: { url: "/methodology/" },
 };
 
 export default function MethodologyPage() {

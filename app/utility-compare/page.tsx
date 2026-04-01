@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description:
     "Compare electricity rates between major US electric utilities side by side. Find out which utility company offers the best rates in your area.",
   alternates: { canonical: "https://powerbillpeek.com/utility-compare/" },
+  openGraph: { url: "/utility-compare/" },
 };
 
 export default function UtilityCompareIndexPage() {

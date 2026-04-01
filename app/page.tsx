@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description:
     "Compare electricity rates across all 50 US states. Average residential rate is 16.5¢/kWh. Use our free calculator to estimate your monthly power bill by appliance.",
   alternates: { canonical: "https://powerbillpeek.com/" },
+  openGraph: { url: "/" },
 };
 
 export default function HomePage() {

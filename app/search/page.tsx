@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Search Electricity Costs - PowerBillPeek",
   description: "Search states, appliances, and utilities for electricity cost and rate data in the PowerBillPeek database.",
   alternates: { canonical: "https://powerbillpeek.com/search/" },
+  openGraph: { url: "/search/" },
 };
 
 interface Props {

@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Power Bill Calculator - Estimate Your Monthly Electricity Cost | PowerBillPeek",
   description: "Free power bill calculator. Select your state and appliances to estimate your monthly electricity cost. Compare costs across all 50 US states.",
   alternates: { canonical: "https://powerbillpeek.com/calculator/" },
+  openGraph: { url: "/calculator/" },
 };
 
 export default function CalculatorPage() {

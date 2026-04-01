@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "Compare Electricity Rates Between States | PowerBillPeek",
   description: "Compare electricity rates, monthly bills, and energy costs between any two US states side by side. Texas vs California, New York vs Florida, and more.",
   alternates: { canonical: "https://powerbillpeek.com/compare/" },
+  openGraph: { url: "/compare/" },
 };
 
 export default function ComparePage() {
