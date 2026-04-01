@@ -12,16 +12,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const utilities = getAllUtilities();
   const utilityComparisons = getUtilityComparisonPairs();
 
+  const now = new Date().toISOString();
   const staticPages: MetadataRoute.Sitemap = [
-    { url: `${SITE_URL}/`, changeFrequency: "monthly", priority: 1.0 },
-    { url: `${SITE_URL}/calculator/`, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE_URL}/compare/`, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE_URL}/utility/`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/utility-compare/`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/about/`, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${SITE_URL}/privacy/`, changeFrequency: "yearly", priority: 0.2 },
-    { url: `${SITE_URL}/terms/`, changeFrequency: "yearly", priority: 0.2 },
-    { url: `${SITE_URL}/contact/`, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${SITE_URL}/`, changeFrequency: "monthly", priority: 1.0, lastModified: now },
+    { url: `${SITE_URL}/calculator/`, changeFrequency: "monthly", priority: 0.9, lastModified: now },
+    { url: `${SITE_URL}/compare/`, changeFrequency: "monthly", priority: 0.9, lastModified: now },
+    { url: `${SITE_URL}/utility/`, changeFrequency: "monthly", priority: 0.8, lastModified: now },
+    { url: `${SITE_URL}/utility-compare/`, changeFrequency: "monthly", priority: 0.8, lastModified: now },
+    { url: `${SITE_URL}/about/`, changeFrequency: "yearly", priority: 0.3, lastModified: now },
+    { url: `${SITE_URL}/privacy/`, changeFrequency: "yearly", priority: 0.2, lastModified: now },
+    { url: `${SITE_URL}/terms/`, changeFrequency: "yearly", priority: 0.2, lastModified: now },
+    { url: `${SITE_URL}/contact/`, changeFrequency: "yearly", priority: 0.3, lastModified: now },
   ];
 
   const statePages: MetadataRoute.Sitemap = states.map((s) => ({
