@@ -26,7 +26,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${state.state} Electricity Rates ${new Date().getFullYear()} - ${formatCents(state.avg_rate_kwh)}/kWh | Energy Cost Guide`,
     description: `${state.state} residential electricity rate: ${formatCents(state.avg_rate_kwh)}/kWh ($${state.avg_monthly_bill}/mo avg bill). Compare commercial & industrial rates, find cost-saving utility providers, and calculate appliance running costs. Free energy rate comparison tool.`,
-    alternates: { canonical: `https://powerbillpeek.com/state/${slug}/` },
+    alternates: { canonical: `/state/${slug}/` },
+    openGraph: { url: `/state/${slug}/` },
   };
 }
 

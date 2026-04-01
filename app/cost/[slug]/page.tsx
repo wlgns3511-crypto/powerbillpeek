@@ -59,7 +59,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `Cost to Run ${appliance.name} in ${state.state} (2026) - ${formatCurrency(monthly)}/Month`,
     description: `Running a ${appliance.name} in ${state.state} costs ${formatCurrency(monthly)}/month or ${formatCurrency(yearly)}/year at ${formatCents(state.avg_rate_kwh)}/kWh. Compare with national average and neighboring states. Energy saving tips included.`,
-    alternates: { canonical: `https://powerbillpeek.com/cost/${slug}/` },
+    alternates: { canonical: `/cost/${slug}/` },
+    openGraph: { url: `/cost/${slug}/` },
     keywords: [
       `${appliance.name.toLowerCase()} electricity cost ${state.state}`,
       `energy efficient ${appliance.name.toLowerCase()}`,

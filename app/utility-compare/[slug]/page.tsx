@@ -52,7 +52,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${u1.name} vs ${u2.name} - Electricity Rate Comparison | PowerBillPeek`,
     description: `Compare ${u1.name} (${formatCents(u1.avg_rate)}/kWh, ${formatNumber(u1.customers)} customers) vs ${u2.name} (${formatCents(u2.avg_rate)}/kWh, ${formatNumber(u2.customers)} customers). See which utility offers better rates.`,
-    alternates: { canonical: `https://powerbillpeek.com/utility-compare/${slug}/` },
+    alternates: { canonical: `/utility-compare/${slug}/` },
+    openGraph: { url: `/utility-compare/${slug}/` },
     keywords: [
       `${u1.name} vs ${u2.name}`,
       `${u1.name} electricity rate`,

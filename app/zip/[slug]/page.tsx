@@ -27,7 +27,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${zip.zip_code} ${zip.city}, ${zip.state} Electric Bill - ${formatCents(zip.avg_rate)}/kWh Rate & Cost Calculator`,
     description: `Electricity rates in ${zip.zip_code} ${zip.city}, ${zip.state}: ${formatCents(zip.avg_rate)}/kWh, $${zip.est_monthly_bill}/mo avg bill. Compare energy costs, calculate appliance running costs, and find savings. ${zip.energy_burden_pct ? `Energy burden: ${zip.energy_burden_pct}% of income.` : ""}`,
-    alternates: { canonical: `https://powerbillpeek.com/zip/${slug}/` },
+    alternates: { canonical: `/zip/${slug}/` },
+    openGraph: { url: `/zip/${slug}/` },
   };
 }
 

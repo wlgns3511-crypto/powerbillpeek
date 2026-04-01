@@ -16,11 +16,9 @@ export const metadata: Metadata = {
     "Compare electricity rates across all 50 US states. Calculate your power bill, explore utility costs, and find the cheapest electricity rates with our free tools.",
   metadataBase: new URL(SITE_URL),
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
-  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
-    url: SITE_URL,
     locale: "en_US",
   },
   twitter: { card: "summary_large_image" },

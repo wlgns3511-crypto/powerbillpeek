@@ -63,7 +63,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${state1.state} vs ${state2.state} Electricity Rates (2026 Comparison)`,
     description: `Compare ${state1.state} (${formatCents(state1.avg_rate_kwh)}/kWh) vs ${state2.state} (${formatCents(state2.avg_rate_kwh)}/kWh) electricity rates. Side-by-side bills, renewable energy, and appliance costs.`,
-    alternates: { canonical: `https://powerbillpeek.com/compare/${slug}/` },
+    alternates: { canonical: `/compare/${slug}/` },
+    openGraph: { url: `/compare/${slug}/` },
     keywords: [
       `${state1.state} vs ${state2.state} electricity`,
       `${state1.state} electricity rates`,

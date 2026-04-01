@@ -31,7 +31,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `Cost to Run ${appliance.name} - ${formatCurrency(monthly)}/Month | PowerBillPeek`,
     description: `How much does it cost to run a ${appliance.name}? At the national average rate, it costs ${formatCurrency(monthly)}/month. See costs for all 50 states.`,
-    alternates: { canonical: `https://powerbillpeek.com/appliance/${slug}/` },
+    alternates: { canonical: `/appliance/${slug}/` },
+    openGraph: { url: `/appliance/${slug}/` },
   };
 }
 

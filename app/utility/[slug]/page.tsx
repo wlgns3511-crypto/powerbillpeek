@@ -31,7 +31,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${utility.name} Electricity Rates & Service Area | PowerBillPeek`,
     description: `${utility.name} serves ${formatNumber(utility.customers)} customers in ${state?.state || utility.state} with an average rate of ${formatCents(utility.avg_rate)}/kWh. Learn about rates, service area, and customer resources.`,
-    alternates: { canonical: `https://powerbillpeek.com/utility/${slug}/` },
+    alternates: { canonical: `/utility/${slug}/` },
+    openGraph: { url: `/utility/${slug}/` },
     keywords: [
       `${utility.name} electricity rate`,
       `${utility.name} electric bill`,
