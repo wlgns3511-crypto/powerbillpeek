@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Disclaimer",
   description: "Disclaimer and limitations of liability for PowerBillPeek.",
+  alternates: { canonical: "/disclaimer/" },
 };
 
 export default function DisclaimerPage() {

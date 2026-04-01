@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Our Methodology",
   description: "Learn how PowerBillPeek collects, processes, and verifies electricity rates and utility cost data.",
+  alternates: { canonical: "/methodology/" },
 };
 
 export default function MethodologyPage() {
