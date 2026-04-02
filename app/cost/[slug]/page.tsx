@@ -22,6 +22,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { AdSlot } from "@/components/AdSlot";
 import { DataFeedback } from "@/components/DataFeedback";
 import { FreshnessTag } from "@/components/FreshnessTag";
+import { PowerBillCalculator } from "@/components/PowerBillCalculator";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -221,6 +222,12 @@ export default async function CostPage({ params }: PageProps) {
       </div>
 
       <AdSlot id="3456789012" />
+
+      <PowerBillCalculator
+        states={allStates.map(s => ({ abbr: s.abbr, state: s.state, avg_rate_kwh: s.avg_rate_kwh }))}
+        appliances={getAllAppliances().map(a => ({ id: a.id, name: a.name, slug: a.slug, category: a.category, avg_watts: a.avg_watts, typical_hours_per_day: a.typical_hours_per_day }))}
+        defaultState={state.abbr}
+      />
 
       {/* Appliance specs */}
       <section className="mb-8">

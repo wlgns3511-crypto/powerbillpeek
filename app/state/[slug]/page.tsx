@@ -9,6 +9,7 @@ import { DataFeedback } from "@/components/DataFeedback";
 import { RateChart } from "@/components/RateChart";
 import { FreshnessTag } from "@/components/FreshnessTag";
 import { CiteButton } from "@/components/CiteButton";
+import { PowerBillCalculator } from "@/components/PowerBillCalculator";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -129,6 +130,12 @@ export default async function StatePage({ params }: PageProps) {
       </div>
 
       <AdSlot id="5678901234" />
+
+      <PowerBillCalculator
+        states={allStates.map(s => ({ abbr: s.abbr, state: s.state, avg_rate_kwh: s.avg_rate_kwh }))}
+        appliances={appliances.map(a => ({ id: a.id, name: a.name, slug: a.slug, category: a.category, avg_watts: a.avg_watts, typical_hours_per_day: a.typical_hours_per_day }))}
+        defaultState={state.abbr}
+      />
 
       {/* Comparison with national average */}
       <section className="mb-8">
