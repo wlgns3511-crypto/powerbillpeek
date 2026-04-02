@@ -267,6 +267,39 @@ export function getTopComparisonPairs(): { state1: string; state2: string; slug:
   return pairs;
 }
 
+// --- Ranking helpers ---
+
+export function getRateRank(slug: string): { rank: number; total: number } {
+  const total = (getDb().prepare("SELECT COUNT(*) as c FROM states").get() as { c: number }).c;
+  const state = getStateBySlug(slug);
+  if (!state) return { rank: 0, total };
+  // Rank 1 = cheapest
+  const cheaper = (getDb().prepare(
+    "SELECT COUNT(*) as c FROM states WHERE avg_rate_kwh < ?"
+  ).get(state.avg_rate_kwh) as { c: number }).c;
+  return { rank: cheaper + 1, total };
+}
+
+export function getBillRank(slug: string): { rank: number; total: number } {
+  const total = (getDb().prepare("SELECT COUNT(*) as c FROM states").get() as { c: number }).c;
+  const state = getStateBySlug(slug);
+  if (!state) return { rank: 0, total };
+  const lower = (getDb().prepare(
+    "SELECT COUNT(*) as c FROM states WHERE avg_monthly_bill < ?"
+  ).get(state.avg_monthly_bill) as { c: number }).c;
+  return { rank: lower + 1, total };
+}
+
+export function getRenewableRank(slug: string): { rank: number; total: number } {
+  const total = (getDb().prepare("SELECT COUNT(*) as c FROM states WHERE renewable_pct IS NOT NULL").get() as { c: number }).c;
+  const state = getStateBySlug(slug);
+  if (!state) return { rank: 0, total };
+  const higher = (getDb().prepare(
+    "SELECT COUNT(*) as c FROM states WHERE renewable_pct IS NOT NULL AND renewable_pct > ?"
+  ).get(state.renewable_pct) as { c: number }).c;
+  return { rank: higher + 1, total };
+}
+
 // --- Related appliances (same category) ---
 
 export function getRelatedAppliances(category: string, excludeSlug: string, limit = 6): Appliance[] {

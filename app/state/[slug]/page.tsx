@@ -10,6 +10,7 @@ import { RateChart } from "@/components/RateChart";
 import { FreshnessTag } from "@/components/FreshnessTag";
 import { CiteButton } from "@/components/CiteButton";
 import { PowerBillCalculator } from "@/components/PowerBillCalculator";
+import { InsightCards } from "@/components/InsightCards";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -104,6 +105,8 @@ export default async function StatePage({ params }: PageProps) {
       </p>
 
       <RateChart stateRate={state.avg_rate_kwh} nationalRate={nationalRate} stateName={state.state} />
+
+      <InsightCards state={state} />
 
       {/* Rate overview cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
