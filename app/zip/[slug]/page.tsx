@@ -16,7 +16,7 @@ export const revalidate = false;
 
 export async function generateStaticParams() {
   // Pre-render top 500 ZIPs; rest served via ISR
-  const zips = getAllZipPower().slice(0, 500);
+  const zips = getAllZipPower().slice(0, 1000);
   return zips.map((z) => ({ slug: z.slug }));
 }
 
